@@ -1,0 +1,9 @@
+C:\Users\E00379.INNOTRON\documents\visual studio 2017\Projects\BitMapTest\BitMapTest\bin\Debug\BitMapTest.exe.config
+C:\Users\E00379.INNOTRON\documents\visual studio 2017\Projects\BitMapTest\BitMapTest\bin\Debug\BitMapTest.exe
+C:\Users\E00379.INNOTRON\documents\visual studio 2017\Projects\BitMapTest\BitMapTest\bin\Debug\BitMapTest.pdb
+C:\Users\E00379.INNOTRON\documents\visual studio 2017\Projects\BitMapTest\BitMapTest\obj\Debug\BitMapTest.csprojResolveAssemblyReference.cache
+C:\Users\E00379.INNOTRON\documents\visual studio 2017\Projects\BitMapTest\BitMapTest\obj\Debug\BitMapTest.Form1.resources
+C:\Users\E00379.INNOTRON\documents\visual studio 2017\Projects\BitMapTest\BitMapTest\obj\Debug\BitMapTest.Properties.Resources.resources
+C:\Users\E00379.INNOTRON\documents\visual studio 2017\Projects\BitMapTest\BitMapTest\obj\Debug\BitMapTest.csproj.GenerateResource.Cache
+C:\Users\E00379.INNOTRON\documents\visual studio 2017\Projects\BitMapTest\BitMapTest\obj\Debug\BitMapTest.exe
+C:\Users\E00379.INNOTRON\documents\visual studio 2017\Projects\BitMapTest\BitMapTest\obj\Debug\BitMapTest.pdb
