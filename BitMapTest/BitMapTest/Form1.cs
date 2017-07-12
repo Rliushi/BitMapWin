@@ -21,6 +21,8 @@ namespace BitMapTest
         Point m_ptCanvas;           //画布原点在设备上的坐标
         Point m_ptCanvasBuf;        //重置画布坐标计算时用的临时变量，用户右键拖拽时使用
         Point m_ptBmp;              //图像位于画布坐标系中的坐标
+        Point m_rect = new Point(256,64);               // 小图中的方框中心点
+        Rectangle rect = new Rectangle(-2, -2, 4, 4);
         float m_nScale = 1.0F;      //缩放比例
         int Flag = 128;             //表示 Scale 数字
         Point m_ptMouseDown;        //鼠标点下是在画布坐标上的坐标
@@ -282,8 +284,8 @@ namespace BitMapTest
 
             g.TranslateTransform(256, 64);       //设置 Scale 64 坐标偏移
             g.ScaleTransform(m_nScale, m_nScale);                   //设置缩放比
-            g.DrawImage(m_bmp_tmp, new Point(-256, -64));                            //绘制Scale 64图像
-
+            g.DrawImage(m_bmp_tmp, new Point(-256, -64));           //绘制Scale 64图像
+            g.DrawRectangle(new Pen(Color.Red, 1), rect);               //绘制方框
             g.ResetTransform();                                     //重置坐标系
         }
 
@@ -307,6 +309,8 @@ namespace BitMapTest
             if (e.Button == MouseButtons.Left)
             {      //如果左键点下    初始化计算要用的临时数据
                 tmppoint = e.Location;
+                m_rect = e.Location;
+                rect = new Rectangle(m_rect.X-258, m_rect.Y-66, 4, 4);
             }
             //显示 SCale 16 的图片
             //int tmp_x = tmppoint.X*16;
@@ -316,6 +320,7 @@ namespace BitMapTest
             int tmp_y = tmppoint.Y * 256;
             m_bmp = Getbmp(1, tmp_x, tmp_y);
             pictureBox1.Invalidate();
+            pictureBox2.Invalidate();
         }
         //平移图像
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
