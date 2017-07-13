@@ -271,7 +271,8 @@ namespace BitMapTest
             g.TranslateTransform(m_ptCanvas.X, m_ptCanvas.Y);       //设置坐标偏移，画布中心点偏移
             g.ScaleTransform(m_nScale, m_nScale);                   //设置缩放比，X 轴和 Y轴
             g.DrawImage(m_bmp, m_ptBmp);                            //绘制图像，使用偏移后的坐标系统
-
+            //g.DrawRectangle(new Pen(Color.Red, 1), rect);               //绘制鼠标点击点
+            
             g.ResetTransform();                                     //重置坐标系，还原中心点坐标
         }
 
@@ -301,6 +302,9 @@ namespace BitMapTest
             label3.Text = p.X.ToString();
             label4.Text = p.Y.ToString();
 
+            //m_bmp.SetPixel(p.X, p.Y, Color.Blue);
+           // pictureBox1.Invalidate();
+
         }
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
@@ -310,17 +314,19 @@ namespace BitMapTest
             {      //如果左键点下    初始化计算要用的临时数据
                 tmppoint = e.Location;
                 m_rect = e.Location;
-                rect = new Rectangle(m_rect.X-258, m_rect.Y-66, 4, 4);
+                rect = new Rectangle(m_rect.X-258, m_rect.Y-66, 4, 4);  //计算方框的左上角坐标
             }
             //显示 SCale 16 的图片
             //int tmp_x = tmppoint.X*16;
             //int tmp_y = tmppoint.Y*16;
             //m_bmp = Getbmp(16, tmp_x, tmp_y);
-            int tmp_x = tmppoint.X * 256;            //显示 Scale 1 的图片
+            int tmp_x = tmppoint.X * 256;            //显示 Scale 1 的图片，坐标转换
             int tmp_y = tmppoint.Y * 256;
             m_bmp = Getbmp(1, tmp_x, tmp_y);
+            textBox1.Text = tmp_x.ToString();
+            textBox2.Text = tmp_y.ToString();
             pictureBox1.Invalidate();
-            pictureBox2.Invalidate();
+            pictureBox2.Invalidate();               //刷新 Rect
         }
         //平移图像
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -387,5 +393,22 @@ namespace BitMapTest
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text == null || textBox2.Text == null)
+            {
+                MessageBox.Show("Please input X and Y Value!!!");
+                return;
+            }
+            if (int.Parse(textBox1.Text) > 131071 || int.Parse(textBox1.Text) < 0 || int.Parse(textBox2.Text) > 32767 || int.Parse(textBox2.Text) < 0)
+            {
+                MessageBox.Show("Please input right Value!!!");
+                return;
+            }
+            m_bmp = Getbmp(1, int.Parse(textBox1.Text), int.Parse(textBox2.Text));
+            rect = new Rectangle(int.Parse(textBox1.Text) / 256 - 256 , int.Parse(textBox2.Text) / 256 - 66, 4, 4);
+            pictureBox1.Invalidate();
+            pictureBox2.Invalidate();
+        }
     }
 } 
