@@ -396,7 +396,7 @@ namespace BitMapTest
         // 输入坐标，自动跳转到该位置显示 Scale 1 的图片
         private void button2_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == null || textBox2.Text == null)
+            if (textBox1.Text == "" || textBox2.Text == "")
             {
                 MessageBox.Show("Please input X and Y Value!!!");
                 return;
@@ -407,7 +407,7 @@ namespace BitMapTest
                 return;
             }
             m_bmp = Getbmp(1, int.Parse(textBox1.Text), int.Parse(textBox2.Text));
-            rect = new Rectangle(int.Parse(textBox1.Text) / 256 - 256 , int.Parse(textBox2.Text) / 256 - 66, 4, 4);   // 减去偏移量是因为画方框时要将中心偏移，画完重置坐标系统
+            rect = new Rectangle(int.Parse(textBox1.Text) / 256 - 258 , int.Parse(textBox2.Text) / 256 - 66, 4, 4);   // 减去偏移量是因为画方框时要将中心偏移，画完重置坐标系统
             pictureBox1.Invalidate();
             pictureBox2.Invalidate();
         }
