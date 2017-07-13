@@ -258,7 +258,7 @@ namespace BitMapTest
             //重新计算 缩放并 重置画布原点坐标
             m_ptCanvas.X += (int)(szSub.Width * m_nScale - szSub.Width);
             m_ptCanvas.Y += (int)(szSub.Height * m_nScale - szSub.Height);
-            pictureBox1.Refresh();
+            pictureBox1.Invalidate();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -284,7 +284,7 @@ namespace BitMapTest
             Graphics g = e.Graphics;
 
             g.TranslateTransform(256, 64);       //设置 Scale 64 坐标偏移
-            g.ScaleTransform(m_nScale, m_nScale);                   //设置缩放比
+            g.ScaleTransform(1, 1);                   //设置缩放比
             g.DrawImage(m_bmp_tmp, new Point(-256, -64));           //绘制Scale 64图像
             g.DrawRectangle(new Pen(Color.Red, 1), rect);               //绘制方框
             g.ResetTransform();                                     //重置坐标系
@@ -323,7 +323,7 @@ namespace BitMapTest
             int tmp_x = tmppoint.X * 256;            //显示 Scale 1 的图片，坐标转换
             int tmp_y = tmppoint.Y * 256;
             m_bmp = Getbmp(1, tmp_x, tmp_y);
-            textBox1.Text = tmp_x.ToString();
+            textBox1.Text = tmp_x.ToString();       // 填充 TextBox 中 Scale 1 的真实坐标值
             textBox2.Text = tmp_y.ToString();
             pictureBox1.Invalidate();
             pictureBox2.Invalidate();               //刷新 Rect
@@ -393,6 +393,7 @@ namespace BitMapTest
 
         }
 
+        // 输入坐标，自动跳转到该位置显示 Scale 1 的图片
         private void button2_Click(object sender, EventArgs e)
         {
             if (textBox1.Text == null || textBox2.Text == null)
@@ -406,7 +407,7 @@ namespace BitMapTest
                 return;
             }
             m_bmp = Getbmp(1, int.Parse(textBox1.Text), int.Parse(textBox2.Text));
-            rect = new Rectangle(int.Parse(textBox1.Text) / 256 - 256 , int.Parse(textBox2.Text) / 256 - 66, 4, 4);
+            rect = new Rectangle(int.Parse(textBox1.Text) / 256 - 256 , int.Parse(textBox2.Text) / 256 - 66, 4, 4);   // 减去偏移量是因为画方框时要将中心偏移，画完重置坐标系统
             pictureBox1.Invalidate();
             pictureBox2.Invalidate();
         }
